@@ -27,3 +27,10 @@ export interface CheckoutDetails {
   cardExpiry?: string;
   cardCvc?: string;
 }
+
+export interface UserProfile {
+  name: string;
+  email: string;
+  avatar?: string;
+  likedProducts: number[]; // Store IDs of liked products
+}

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { NavBar } from "@/components/NavBar";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,10 +9,13 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from "react-router-dom";
 import { Github } from "lucide-react";
+import { useUser } from "@/contexts/UserContext";
+import { UserProfile } from "@/types";
 
 const Auth = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { login } = useUser();
   const [activeTab, setActiveTab] = useState("login");
   
   // Login form state
@@ -32,12 +34,20 @@ const Auth = () => {
     e.preventDefault();
     
     // In a real app, you would validate and authenticate the user
+    const userData: UserProfile = {
+      name: loginEmail.split('@')[0], // Using email username as the name for demo
+      email: loginEmail,
+      likedProducts: []
+    };
+    
+    login(userData);
+    
     toast({
       title: "Login successful!",
       description: "Welcome back to StyleHaven.",
     });
     
-    navigate("/");
+    navigate("/profile");
   };
   
   const handleRegister = (e: React.FormEvent) => {
@@ -54,20 +64,39 @@ const Auth = () => {
     }
     
     // In a real app, you would register the user with a backend service
+    const userData: UserProfile = {
+      name: registerName,
+      email: registerEmail,
+      likedProducts: []
+    };
+    
+    login(userData);
+    
     toast({
       title: "Registration successful!",
-      description: "Welcome to StyleHaven. You can now login.",
+      description: "Welcome to StyleHaven!",
     });
     
-    setActiveTab("login");
+    navigate("/profile");
   };
   
   const handleGoogleLogin = () => {
-    // In a real app, you would implement Google OAuth login
+    // For demo purposes, create a sample Google user
+    const userData: UserProfile = {
+      name: "Google User",
+      email: "google.user@example.com",
+      avatar: "https://ui-avatars.com/api/?name=Google+User&background=random",
+      likedProducts: []
+    };
+    
+    login(userData);
+    
     toast({
-      title: "Google login",
-      description: "Google authentication would be implemented here.",
+      title: "Google login successful",
+      description: "You're now logged in with Google.",
     });
+    
+    navigate("/profile");
   };
   
   return (

@@ -4,8 +4,8 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Heart } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
+import { useUser } from "@/contexts/UserContext";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 interface ProductCardProps {
   product: Product;
@@ -13,7 +13,8 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
-  const [isLiked, setIsLiked] = useState(false);
+  const { toggleLikeProduct, isProductLiked } = useUser();
+  const isLiked = isProductLiked(product.id);
   
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -24,7 +25,7 @@ export function ProductCard({ product }: ProductCardProps) {
   const handleLike = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    setIsLiked(!isLiked);
+    toggleLikeProduct(product.id);
   };
   
   return (
