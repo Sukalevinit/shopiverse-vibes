@@ -1,8 +1,8 @@
-# Welcome to your Lovable project
+# Welcome to your project
 
-## Project info
+## Project host
 
-**URL**: https://lovable.dev/projects/2fc0d407-44ab-4736-9aa2-ed5b5c749cc9
+**URL**: https://shopiverse-vibes.lovable.app
 
 ## How can I edit this code?
 
