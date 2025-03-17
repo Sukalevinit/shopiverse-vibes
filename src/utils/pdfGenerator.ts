@@ -2,9 +2,6 @@
 import { jsPDF } from "jspdf";
 import { CartItem, CheckoutDetails } from "@/types";
 
-// Add dependency for jsPDF
-<lov-add-dependency>jspdf@latest</lov-add-dependency>
-
 export const generateReceiptPDF = (
   items: CartItem[],
   checkoutDetails: CheckoutDetails,
